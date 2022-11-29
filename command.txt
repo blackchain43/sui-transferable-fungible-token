@@ -1,0 +1,10 @@
+sui client call --function mint  --module usdt_test --package 0xe33ed86aa50d665547618d2b251493ba252cb347  --args 0xe0b23f168d8236f2d1a6b4b59f3ad4837614f3aa 	0x151e45cdddabb05466193769650738ac107c7fa1 1000000000000  --gas-budget 1000
+
+sui client call --function create  --module usdt_test --package 0xe33ed86aa50d665547618d2b251493ba252cb347  --args 0xe0b23f168d8236f2d1a6b4b59f3ad4837614f3aa 0xb4c8f7256505109bfd8e794cfe23941b86646f68   --gas-budget 1000
+
+sui client call --function mint  --module usdt --package 0x78e4945d3d0b1ff718760dc0f009cb5e3e3173b2  --args 0x18273514cda59594842106744ef8cdf7e76b4e1c 	1000000000000000 0xf537b62e9e08448beefc52368af8464ce149a9d3  --gas-budget 1000
+
+sui client call --function transfer  --module usdt --package 0x21b358b19f623d84a5e333f373abe5f07b37931e  --args 0x33a204ba2f1235aa3be113342e5434e969c52c4b 	50000 0x5668d676d2ccd923997c7234f60f65473e0af447  --gas-budget 1000
+
+**issue when parse vector: https://github.com/MystenLabs/sui/issues/5338**
+sui client call --function transfer  --module usdt --package 0x78e4945d3d0b1ff718760dc0f009cb5e3e3173b2  --args "[\"0x1b61b8fef13d5a8a5b1c714cc26e8a855bfa101e\",\"0x7007a01afaea766e01c6bf031c2be51c9edd1103\",\"0xeb55cfc00c5bf1bb14f722712bcbaf7418a76b16\"]" 600000000000000 0xac05b39bd73794fa13f0218d5030c623d34f29d3  --type-args 0x78e4945d3d0b1ff718760dc0f009cb5e3e3173b2::usdt::USDT --gas-budget 1000 
