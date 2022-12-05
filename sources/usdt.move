@@ -25,7 +25,8 @@ module usdt::usdt {
         let (treasury_cap, metadata) = coin::create_currency<USDT>(witness, 9, b"USDT", b"", b"", option::none(),ctx);
         // Make it a share object so that anyone can mint
         transfer::share_object(metadata);
-        transfer::transfer(treasury_cap, tx_context::sender(ctx))
+        // transfer::transfer(treasury_cap, tx_context::sender(ctx))
+        transfer::share_object(treasury_cap);
         
     } 
 
