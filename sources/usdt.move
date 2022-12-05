@@ -5,13 +5,14 @@
 /// By convention, modules defining custom coin types use upper case names, in contrast to
 /// ordinary modules, which use camel case.
 module usdt::usdt {
-    use sui::coin::{Self, Coin, TreasuryCap};
+    use std::option;
+    use sui::coin::{Self, TreasuryCap};
     use sui::transfer;
     use sui::pay;
     use sui::tx_context::{Self, TxContext};
     use std::vector;
     /// Name of the coin. By convention, this type has the same name as its parent module
-    /// and has no fields. The full type of the coin defined by this module will be `COIN<USDT>`.
+    /// and has no fields. The full type of the coin defined by this module will be `COIN<R1COIN>`.
     struct USDT has drop {}
 
     /// For when empty vector is supplied into join function.
@@ -21,9 +22,11 @@ module usdt::usdt {
     /// registered once.
     fun init(witness: USDT, ctx: &mut TxContext) {
         // Get a treasury cap for the coin 
-        let coin = coin::create_currency<USDT>(witness, 9, ctx);
+        let (treasury_cap, metadata) = coin::create_currency<USDT>(witness, 9, b"USDT", b"", b"", option::none(),ctx);
         // Make it a share object so that anyone can mint
-        transfer::share_object(coin)
+        transfer::share_object(metadata);
+        transfer::transfer(treasury_cap, tx_context::sender(ctx))
+        
     } 
 
 
